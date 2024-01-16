@@ -1,0 +1,32 @@
+version: 3
+
+## add tasksfiles as per the project requirements
+includes:
+  init:
+    taskfile: ../../commons/init.yaml
+    optional: true
+
+tasks:
+  plan:
+    desc: "Apply"
+    cmds:
+      - task: init:setup
+      - >
+        docker-compose run terraform plan \
+          -var-file=environments/{{.ENVIRONMENT}}.yaml
+          
+  apply:
+    desc: "Apply"
+    deps: [plan]
+    cmds:
+      - >
+        docker-compose run terraform apply \
+          -var-file=environments/{{.ENVIRONMENT}}.yaml
+  
+  destroy:
+    desc: "Apply"
+    deps: [plan]
+    cmds:
+      - >
+        docker-compose run terraform apply \
+          -var-file=environments/{{.ENVIRONMENT}}.yaml
