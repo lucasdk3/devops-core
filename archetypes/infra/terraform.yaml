@@ -13,7 +13,7 @@ tasks:
       - task: init:setup
       - >
         docker-compose run terraform plan \
-          -var-file=environments/{{.ENVIRONMENT}}.yaml
+          -var-file=environments/{{.ENVIRONMENT}}.tfvars
           
   apply:
     desc: "Apply"
@@ -21,7 +21,7 @@ tasks:
     cmds:
       - >
         docker-compose run terraform apply \
-          -var-file=environments/{{.ENVIRONMENT}}.yaml
+          -var-file=environments/{{.ENVIRONMENT}}.tfvars
   
   destroy:
     desc: "Apply"
@@ -29,4 +29,4 @@ tasks:
     cmds:
       - >
         docker-compose run terraform apply \
-          -var-file=environments/{{.ENVIRONMENT}}.yaml
+          -var-file=environments/{{.ENVIRONMENT}}.tfvars
